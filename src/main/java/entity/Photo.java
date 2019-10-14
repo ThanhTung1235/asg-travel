@@ -7,8 +7,6 @@ public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Place place;
     private String link;
 
     public long getId() {
@@ -17,14 +15,6 @@ public class Photo {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Place getPlace() {
-        return place;
-    }
-
-    public void setPlace(Place place) {
-        this.place = place;
     }
 
     public String getLink() {

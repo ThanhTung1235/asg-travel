@@ -11,7 +11,31 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    private String password;
     private int role; // 1. \ 2.
+
+    public enum Role {
+        MEMBER(0), TRAVELER(1);
+
+        int value;
+
+        Role(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public static Role findByValue(int value) {
+            for (Role role : Role.values()) {
+                if (role.getValue() == value) {
+                    return role;
+                }
+            }
+            return null;
+        }
+    }
 
     public long getId() {
         return id;
@@ -33,7 +57,15 @@ public class Member {
         return role;
     }
 
-    public void setRole(int role) {
-        this.role = role;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(Role role) {
+        this.role = role.getValue();
     }
 }

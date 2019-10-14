@@ -33,7 +33,8 @@ public class PlaceServiceImpl implements PlaceService {
 
     @WebMethod
     public List<Place> getAll() {
-        return HibernateUtil.getSession().createQuery("select  a from Place a", Place.class).getResultList();
+        List<Place> placeList = HibernateUtil.getSession().createQuery("from Place", Place.class).list();
+        return placeList;
     }
 
     @WebMethod

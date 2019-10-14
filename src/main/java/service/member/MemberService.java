@@ -13,4 +13,8 @@ public interface MemberService {
 
     @WebMethod
     List<Member> getAll();
+
+    @WebMethod
+    Member Authentication(String username, String password);
+
 }

@@ -1,15 +1,20 @@
 package entity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "devvn_quanhuyen")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class District {
     @Id
     private long maqh;
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "mtp")
+    @XmlTransient
     private City city;
     private String type;
 

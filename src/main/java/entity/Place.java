@@ -1,21 +1,36 @@
 package entity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
+//@XmlAccessorType(XmlAccessType.FIELD)
 public class Place {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "districtId")
+//    @XmlTransient
     private District district;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "cityId")
+//    @XmlTransient
     private City city;
+    private String photo;
     private double ratingCount;
     private double ratingValue;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public long getId() {
         return Id;

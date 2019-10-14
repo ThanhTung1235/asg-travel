@@ -36,4 +36,11 @@ public class MemberServiceImpl implements MemberService {
     public List<Member> getAll() {
         return HibernateUtil.getSession().createQuery("SELECT a FROM Member a", Member.class).getResultList();
     }
+
+    public Member Authentication(String username, String password) {
+//        HibernateUtil.getSession().createQuery("select a from Member a where name = :username", Member.class);
+        return null;
+    }
+
+
 }
