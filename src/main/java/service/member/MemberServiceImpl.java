@@ -8,6 +8,7 @@ import util.HibernateUtil;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.persistence.Query;
 import java.io.Serializable;
 import java.util.List;
 
@@ -37,9 +38,19 @@ public class MemberServiceImpl implements MemberService {
         return HibernateUtil.getSession().createQuery("SELECT a FROM Member a", Member.class).getResultList();
     }
 
+    @WebMethod
     public Member Authentication(String username, String password) {
-//        HibernateUtil.getSession().createQuery("select a from Member a where name = :username", Member.class);
-        return null;
+        Query query = HibernateUtil.getSession().createQuery("from Member where name = :name ");
+        query.setParameter("name", username);
+        List<Member> list = query.getResultList();
+        Member member = list.get(0);
+        if (member == null) return null;
+        else {
+            if (member.getPassword().equals(password)){
+                return member;
+            } else  return null;
+
+            }
     }
 
 
