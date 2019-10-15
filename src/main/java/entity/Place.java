@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 //@XmlAccessorType(XmlAccessType.FIELD)
@@ -23,6 +25,26 @@ public class Place {
     private String photo;
     private double ratingCount;
     private double ratingValue;
+    @OneToMany(mappedBy = "place", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Comment> comments = new ArrayList<Comment>();
+    @OneToMany(mappedBy = "place", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Rating> ratings = new ArrayList<Rating>();
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
 
     public String getPhoto() {
         return photo;

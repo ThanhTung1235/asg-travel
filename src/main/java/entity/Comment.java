@@ -1,8 +1,12 @@
 package entity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,6 +16,7 @@ public class Comment {
     private Member member;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "palaceId")
+    @XmlTransient
     private Place place;
     private String comment;
 
